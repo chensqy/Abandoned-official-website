@@ -1,0 +1,574 @@
+
+<!--
+    Hello,world
+    Copyright Chenlexuan
+    Friendship list:
+    fens_up MARIOS
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的 Minecraft 网站</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4f4;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .nav {
+            background-color: #444;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .main {
+            display: flex;
+            padding: 20px;
+        }
+        .content {
+            flex: 3;
+            margin-right: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar {
+            flex: 1;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .hidden-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .hidden-section h2 {
+            color: #ff6347;
+        }
+        .hidden-section p {
+            color: #ffa500;
+        }
+        .hidden-section button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .hidden-section button:hover {
+            background-color: #45a049;
+        }
+        .hidden-section:target {
+            display: block;
+        }
+        .fun-fact {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: transform 0.3s ease-in-out;
+        }
+        .fun-fact:hover {
+            transform: scale(1.1);
+        }
+        .joke-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+        .joke-button:hover {
+            background-color: #45a049;
+        }
+        .joke-container {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: none;
+        }
+        .blog {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .blog.active {
+            display: block;
+        }
+        .blog-post, .comment {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .blog-post:last-child, .comment:last-child {
+            border-bottom: none;
+        }
+        .blog-form, .comment-form {
+            margin-top: 20px;
+        }
+        .blog-form input, .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .blog-form button, .comment-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .blog-form button:hover, .comment-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>我的 Minecraft 网站</h1>
+    </div>
+    <div class="nav">
+        <a href="javascript:void(0)" onclick="showSection('home')">首页</a>
+        <a href="javascript:void(0)" onclick="showSection('about')">关于我们</a>
+        <a href="javascript:void(0)" onclick="showSection('services')">服务</a>
+        <a href="javascript:void(0)" onclick="showSection('contact')">联系我们</a>
+        <a href="javascript:void(0)" onclick="showSection('secret')">秘密彩蛋</a>
+        <a href="javascript:void(0)" onclick="showBlog()">博客</a>
+    </div>
+    <div class="main">
+        <div class="content">
+            <section id="home">
+                <h2>欢迎来到我的 Minecraft 网站</h2>
+                <p>这里是首页，欢迎访问我的 Minecraft 网站。</p>
+            </section>
+            <section id="about" style="display:none;">
+                <h2>关于我们</h2>
+                <p>我们是 Minecraft 服务器的管理人员，致力于提供最佳的游戏体验。</p>
+            </section>
+            <section id="services" style="display:none;">
+                <h2>服务</h2>
+                <p>提供 Minecraft 的游戏服务。</p>
+                <p>服务器地址：s8.singsi.cn:37017</p>
+            </section>
+            <section id="contact" style="display:none;">
+                <h2>联系我们</h2>
+                <p>邮箱：<a href="/cdn-cgi/l/email-protection#c7a2bfa6aab7aba287a2bfa6aab7aba2e9a4a8aa"><span class="__cf_email__" data-cfemail="62071a030f120e0722071a030f120e074c010d0f">[email&#160;protected]</span></a></p>
+            </section>
+            <section id="secret" class="hidden-section">
+                <h2>你发现了一个秘密彩蛋！🎉</h2>
+                <p>恭喜你找到了这个隐藏的页面。这里有一些有趣的内容：</p>
+                <p>隐藏的视频：</p>
+                <video width="320" height="240" controls>
+                    <source src="https://www.example.com/path/to/your/video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p>隐藏的链接：<a href="https://chen-d7o.pages.dev/">访问更多秘密内容</a></p>
+                <button onclick="closeSecret()">关闭彩蛋</button>
+            </section>
+            <div id="blog-section" class="blog">
+                <h2>博客</h2>
+                <div id="blog-posts">
+                    <h3>博客文章</h3>
+                    <ul id="blog-list"></ul>
+                </div>
+                <div id="blog-form" class="blog-form">
+                    <h3>发布博客</h3>
+                    <form>
+                        <label for="blog-title">标题：</label>
+                        <input type="text" id="blog-title" required>
+                        <label for="blog-content">内容：</label>
+                        <textarea id="blog-content" rows="5" required></textarea>
+                        <button type="button" onclick="publishBlog()">发布</button>
+                    </form>
+                </div>
+                <div id="comments-section">
+                    <h3>评论</h3>
+                    <ul id="comments-list"></ul>
+                    <form id="comment-form" class="comment-form">
+                        <label for="comment-content">评论：</label>
+                        <textarea id="comment-content" rows="3" required></textarea>
+                        <button type="button" onclick="postComment()">发布评论</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar">
+            <h3>最新文章</h3>
+            <div class="article">
+                <h4><a href="#article1" class="article-link">如何搭建自己的 Minecraft 服务器</a></h4>
+                <p>搭建自己的 Minecraft 服务器可以让你和朋友们一起玩，这里有一些步骤和技巧。</p>
+            </div>
+            <div class="article">
+                <h4><a href="#article2" class="article-link">10个你不知道的 Minecraft 秘密</a></h4>
+                <p>Minecraft 中有许多隐藏的秘密，这里为你揭示其中的10个。</p>
+            </div>
+            <div class="article">
+                <h4><a href="#article3" class="article-link">Minecraft 中的最佳建筑技巧</a></h4>
+                <p>想要在 Minecraft 中建造出令人惊叹的建筑吗？这里有一些最佳技巧。</p>
+            </div>
+            <h3>热门话题</h3>
+            <div class="topic">
+                <h4><a href="#topic1" class="topic-link">Minecraft 服务器优化</a></h4>
+                <p>了解如何优化你的 Minecraft 服务器，提高游戏体验。</p>
+            </div>
+            <div class="topic">
+                <h4><a href="#topic2" class="topic-link">Minecraft 模组推荐</a></h4>
+                <p>这里有一些最受欢迎的 Minecraft 模组，可以为你的游戏增添更多乐趣。</p>
+            </div>
+            <div class="topic">
+                <h4><a href="#topic3" class="topic-link">Minecraft 生存模式攻略</a></h4>
+                <p>生存模式是 Minecraft 的核心玩法之一，这里有一些攻略帮助你更好地生存。</p>
+            <wwwww/div>
+            <h3>广告</h3>
+            <img src="https://via.placeholder.com/300x250?text=广告图片" alt="广告图片">
+        </div>
+    </div>
+    <div class="footer">
+        <p>版权所有 &copy; 2025</p>
+        <button id="login-button">登录 / 注册</button>
+    </div>
+    <div id="login-modal" class="hidden-section">
+        <div class="login-container">
+            <h2>登录 / 注册</h2>
+            <div class="tabs">
+                <button class="tab" onclick="showTab('login')">登录</button>
+                <button class="tab" onclick="showTab('register')">注册</button>
+            </div>
+            <div id="login-form" class="form">
+                <h3>登录</h3>
+                <form>
+                    <label for="login-username">用户名：</label>
+                    <input type="text" id="login-username" name="username" required>
+                    <label for="login-password">密码：</label>
+                    <input type="password" id="login-password" name="password" required>
+                    <button type="submit">登录</button>
+                </form>
+            </div>
+            <div id="register-form" class="form" style="display: none;">
+                <h3>注册</h3>
+                <form>
+                    <label for="register-username">用户名：</label>
+                    <input type="text" id="register-username" name="username" required>
+                    <label for="register-email">邮箱：</label>
+                    <input type="email" id="register-email" name="email" required>
+                    <label for="register-password">密码：</label>
+                    <input type="password" id="register-password" name="password" required>
+                    <button type="submit">注册</button>
+                </form>
+            </div>
+            <button onclick="closeLoginModal()">关闭</button>
+        </div>
+    </div>
+    <button class="fun-fact" onclick="showFunFact()">
+        📚 点我看看有趣的事实
+    </button>
+    <div id="fun-fact-container" style="display: none; position: fixed; bottom: 80px; right: 20px; background-color: #fff; padding: 10px; border-radius: 5px; z-index: 1002;">
+        <p id="fun-fact-content"></p>
+        <button onclick="closeFunFact()">关闭</button>
+    </div>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let blogs = JSON.parse(localStorage.getItem('blogs')) || [];
+        let comments = JSON.parse(localStorage.getItem('comments')) || [];
+        let isLoggedIn = false;
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.content section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+            if (sectionId === 'blog') {
+                showBlog();
+            }
+        }
+
+        function closeSecret() {
+            document.getElementById('secret').style.display = 'none';
+        }
+
+        function showFunFact() {
+            const funFacts = [
+                '你知道吗？Minecraft 是由 Markus Persson 开发的，最初发布于 2011 年。',
+                '你知道吗？Minecraft 有超过 1.4 亿的月活跃用户。',
+                '你知道吗？Minecraft 的世界是由 1x1x1 的方块组成的，每个方块都有自己的属性。',
+                '你知道吗？Minecraft 中的末影人会传送，但它们不会穿过墙。',
+                '你知道吗？Minecraft 中的末影龙是游戏中的最终 Boss，击败它可以获得成就。',
+                '你知道吗？Minecraft 中的村民会交易，但它们不会接受没有价值的物品。',
+                '你知道吗？Minecraft 中的下界是一个充满危险的地方，但也是获取稀有资源的好地方。',
+                '你知道吗？Minecraft 中的末影珍珠可以用来传送，但使用不当会掉入虚空。',
+                '你知道吗？Minecraft 中的铁傀儡可以保护村庄，但它们不会攻击玩家。',
+                '你知道吗？Minecraft 中的雪傀儡可以融化，但它们会在雪地生物群系中重生。'
+            ];
+            const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+            document.getElementById('fun-fact-content').innerText = randomFact;
+            document.getElementById('fun-fact-container').style.display = 'block';
+        }
+
+        function closeFunFact() {
+            document.getElementById('fun-fact-container').style.display = 'none';
+        }
+
+        function showJoke() {
+            const jokes = [
+                "为什么电脑生病了？因为它得了病毒！",
+                "为什么数学书看起来总是很悲伤？因为它有太多的问题。",
+                "为什么海洋从来不说‘谢谢’？因为它太‘海’了。",
+                "为什么铅笔总是赢？因为它有‘尖’。",
+                "为什么书本总是很酷？因为它有很多‘封面’。",
+                "为什么咖啡害怕去学校？因为它怕被‘拿铁’。",
+                "为什么蜘蛛不会生病？因为它有‘网’。",
+                "为什么月亮总是跟着你？因为它喜欢‘追星’。",
+                "为什么电脑总是赢？因为它有‘芯片’。",
+                "为什么书本总是很忙？因为它有很多‘页’。"
+            ];
+            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            document.getElementById('joke-container').innerText = randomJoke;
+            document.getElementById('joke-container').style.display = 'block';
+        }
+
+        function triggerEffects() {
+            const body = document.body;
+            body.style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                body.style.animation = '';
+            }, 500);
+
+            body.style.backgroundColor = '#ff4500';
+            setTimeout(() => {
+                body.style.backgroundColor = '';
+            }, 1000);
+
+            alert('哈哈，你还是点了！');
+        }
+
+        // 登录和注册功能
+        document.getElementById('login-button').addEventListener('click', function() {
+            document.getElementById('login-modal').style.display = 'block';
+        });
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').style.display = 'none';
+        }
+
+        function showTab(tabName) {
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            if (tabName === 'login') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+            } else if (tabName === 'register') {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            }
+        }
+
+        function login() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            for (let user of users) {
+                if (user.username === username && user.password === password) {
+                    isLoggedIn = true;
+                    alert('登录成功！');
+                    closeLoginModal();
+                    return;
+                }
+            }
+            alert('用户名或密码错误！');
+        }
+
+        function register() {
+            const username = document.getElementById('register-username').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            users.push({ username, email, password });
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('注册成功！');
+            closeLoginModal();
+        }
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            login();
+        });
+
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            register();
+        });
+
+        function showBlog() {
+            if (!isLoggedIn) {
+                alert('请先登录！');
+                document.getElementById('login-button').click();
+            } else {
+                document.getElementById('blog-section').classList.add('active');
+                loadBlogs();
+                loadComments();
+            }
+        }
+
+        function publishBlog() {
+            if (!isLoggedIn) {
+                alert('请先登录！');
+                document.getElementById('login-button').click();
+                return;
+            }
+            const title = document.getElementById('blog-title').value;
+            const content = document.getElementById('blog-content').value;
+            if (title && content) {
+                const blog = { title, content, comments: [] };
+                blogs.push(blog);
+                localStorage.setItem('blogs', JSON.stringify(blogs));
+                document.getElementById('blog-list').innerHTML += `
+                    <li class="blog-post">
+                        <h4>${title}</h4>
+                        <p>${content}</p>
+                        <p>作者：${users.find(user => user.username === username).username}</p>
+                    </li>
+                `;
+                document.getElementById('blog-title').value = '';
+                document.getElementById('blog-content').value = '';
+            } else {
+                alert('标题和内容不能为空！');
+            }
+        }
+
+        function postComment() {
+            if (!isLoggedIn) {
+                alert('请先登录！');
+                document.getElementById('login-button').click();
+                return;
+            }
+            const content = document.getElementById('comment-content').value;
+            if (content) {
+                const comment = { content, author: '当前登录用户名' };
+                blogs[blogs.length - 1].comments.push(comment);
+                localStorage.setItem('blogs', JSON.stringify(blogs));
+                document.getElementById('comments-list').innerHTML += `
+                    <li class="comment">
+                        <p>${content}</p>
+                        <p>作者：${comment.author}</p>
+                    </li>
+                `;
+                     <div class="article">
+                <h2>test</h2>
+                <p>发布日期2025年02月07日</p>
+                <p>test</p>
+             </div>
+                document.getElementById('comment-content').value = '';
+            } else {
+                alert('评论内容不能为空！');
+            }
+        }
+
+        function loadBlogs() {
+            document.getElementById('blog-list').innerHTML = '';
+            blogs.forEach(blog => {
+                document.getElementById('blog-list').innerHTML += `
+                    <li class="blog-post">
+                        <h4>${blog.title}</h4>
+                        <p>${blog.content}</p>
+                        <p>作者：${blog.author}</p>
+                    </li>
+                `;
+            });
+        }
+
+        function loadComments() {
+            document.getElementById('comments-list').innerHTML = '';
+            blogs[blogs.length - 1].comments.forEach(comment => {
+                document.getElementById('comments-list').innerHTML += `
+                    <li class="comment">
+                        <p>${comment.content}</p>
+                        <p>作者：${comment.author}</p>
+                    </li>
+                `;
+            });
+        }
+
+        window.onload = function() {
+            showSection('home');
+            loadBlogs();
+            loadComments();
+        };
+    </script>
+    <style>
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+    </style>
+</body>
+</html>
